@@ -33,6 +33,14 @@ void pinoutInit(void){
   for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_BUTTONS; i++) {
     pinMode(dre.detection.but_pins[i], INPUT_PULLUP);
   }
+
+  /* Configure the atari norm connector as output, for MSX */
+  pinMode(CFG_ATARI_PIN_1,OUTPUT);  // FW
+  pinMode(CFG_ATARI_PIN_2,OUTPUT);  // BW
+  pinMode(CFG_ATARI_PIN_3,OUTPUT);  // LEFT
+  pinMode(CFG_ATARI_PIN_4,OUTPUT);  // RIGHT
+  pinMode(CFG_ATARI_PIN_6,OUTPUT);  // BUT1
+  pinMode(CFG_ATARI_PIN_7,OUTPUT);  // BUT2
 }
 
 

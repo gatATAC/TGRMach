@@ -39,7 +39,35 @@ void prjOutput(void) {
     if (dre.detection.allButtons[i] == 1) {
       /* When any button is pressed, the power pin will be switched down to indicate something is detected */
       digitalWrite(CFG_POWERGND_PIN,HIGH);
+
+      /** Translation of buttons to MSX */
+      switch(i){
+        case 0:
+          /* The first button is pressed */
+          digitalWrite(CFG_ATARI_PIN_6,LOW);
+          break;        
+        case 1:
+          /* The first button is pressed */
+          digitalWrite(CFG_ATARI_PIN_7,LOW);
+          break;
+      }
+      
+    } else {
+      
+      /** Translation of buttons to MSX */
+      switch(i){
+        case 0:
+          /* The first button is released */
+          digitalWrite(CFG_ATARI_PIN_6,HIGH);
+          break;        
+        case 1:
+          /* The first button is pressed */
+          digitalWrite(CFG_ATARI_PIN_7,HIGH);
+          break;
+      }
+
     }
+    
     /* Update USB data structure */
     Joystick.button(i + 1, dre.detection.allButtons[i]);
   }
@@ -58,17 +86,45 @@ void prjOutput(void) {
     }
   }
 
+
   if (dre.detection.detectedJoy[CFG_JOY_LEFT_IDX]){
     valueX=CFG_USB_JOYSTICK_LEFT_POS;
-  } 
+
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_3,LOW);  // LEFT
+  } else {
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_3,HIGH);  // LEFT
+  }
+
   if (dre.detection.detectedJoy[CFG_JOY_RIGHT_IDX]){
     valueX=CFG_USB_JOYSTICK_RIGHT_POS;
+
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_4,LOW);  // RIGHT
+  } else {
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_4,HIGH);  // RIGHT
   }
+
   if (dre.detection.detectedJoy[CFG_JOY_UP_IDX]){
     valueY=CFG_USB_JOYSTICK_UP_POS;
+
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_1,LOW);  // FW
+  } else {
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_1,HIGH);  // FW
   }
+
   if (dre.detection.detectedJoy[CFG_JOY_DOWN_IDX]){
     valueY=CFG_USB_JOYSTICK_DOWN_POS;
+
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_2,LOW);  // BW
+  } else {
+    // Translation to MSX
+    digitalWrite(CFG_ATARI_PIN_2,HIGH);  // BW
   }
   
   /* Update USB data structure */
