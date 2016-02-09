@@ -9,6 +9,18 @@
 
 /* Prepares the pinout for project use */
 void pinoutInit(void){
+
+  /* Configure the atari norm connector as input, to avoid shortcircuits */
+  pinMode(CFG_ATARI_PIN_1,INPUT);
+  pinMode(CFG_ATARI_PIN_2,INPUT);
+  pinMode(CFG_ATARI_PIN_3,INPUT);
+  pinMode(CFG_ATARI_PIN_4,INPUT);
+  //pinMode(CFG_ATARI_PIN_5,INPUT);
+  pinMode(CFG_ATARI_PIN_6,INPUT);
+  pinMode(CFG_ATARI_PIN_7,INPUT);
+  pinMode(CFG_ATARI_PIN_8,INPUT);
+  //pinMode(CFG_ATARI_PIN_9,INPUT);
+  
   /* Configure the power led DO pin */
   pinMode(CFG_POWERGND_PIN,OUTPUT);
   
