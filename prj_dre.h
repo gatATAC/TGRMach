@@ -22,6 +22,7 @@ typedef struct {
 /* This structure type contains the DRE global variables */
 typedef struct {
   t_detection detection;
+  uint8_t atari_system;
 } t_dre;
 
 /* This declaration make the dre visible to all the project modules */

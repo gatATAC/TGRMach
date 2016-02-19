@@ -13,6 +13,12 @@ t_dre dre;
 void dreInit(void) {
 
   Serial.println("DRE Initialization");
+
+/**** Atari norm system detection ****/
+
+#ifdef DEBUG_FORCE_MSX
+  dre.atari_system=CFG_ATARI_NORM_MSX;
+#endif
   
   dre.detection.angle=-1;
   dre.detection.prev_angle=-1;  

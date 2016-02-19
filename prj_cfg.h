@@ -4,6 +4,7 @@
 /****** Debug section ******/
 //#define DEBUG_BUT_INPUT  
 //#define DEBUG_JOY_INPUT  
+#define DEBUG_FORCE_MSX
 
 /**** Cycle time section ****/
 #define CYCLE_TIME_IN_MICROS (5000L)
@@ -36,6 +37,9 @@
 #define CFG_USB_JOYSTICK_UP_POS 0
 #define CFG_USB_JOYSTICK_DOWN_POS 1023
 
+/**** Atari norm system ****/
+#define CFG_ATARI_NORM_MSX 0
+#define CFG_ATARI_NORM_AMIGA 1
 
 #endif /* _PRJ_CFG_H */
 
