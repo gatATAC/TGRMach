@@ -43,28 +43,3 @@ void pinoutInit(void);
 #endif // _PRJ_PINOUT_H
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

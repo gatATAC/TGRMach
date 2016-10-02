@@ -12,6 +12,8 @@
 #include "prj_dre.h"
 /* Inclusion of the arduino methods */
 #include "Arduino.h"
+/* Inclusion for FSM module */
+#include "fsm.h"
 
 /* Initialization of the output routines.
 WARNING: The pinout initialization is not done here.  
@@ -31,6 +33,10 @@ void prjOutput(void) {
   /* When any button is pressed, the power pin will be switched down to indicate something is detected */
   /* By default, the power led must be active */
   digitalWrite(CFG_POWERGND_PIN,LOW);
+
+
+  /************* SPECIAL FUNCTION SECTION ************/
+  autofire();
 
   /************* BUTTONS SECTION ***************/
   
@@ -155,4 +161,6 @@ void prjOutput(void) {
   // This send_now() transmits everything all at once.
   Joystick.send_now();  
 }
+
+
 

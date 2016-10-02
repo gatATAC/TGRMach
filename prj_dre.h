@@ -23,6 +23,7 @@ typedef struct {
 typedef struct {
   t_detection detection;
   uint8_t atari_system;
+  uint32_t autofireTimer;
 } t_dre;
 
 /* This declaration make the dre visible to all the project modules */
@@ -32,6 +33,7 @@ extern t_dre dre;
 void dreInit(void);
 
 #endif // _PRJ_DRE_H
+
 
 
 

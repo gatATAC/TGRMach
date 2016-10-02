@@ -41,10 +41,3 @@ void dreInit(void) {
   dre.detection.but_pins[CFG_JOY_RESTARTBUT_IDX]=CFG_JOY_RESTARTBUT_PIN;
   dre.detection.but_pins[CFG_JOY_PLAYERBUT_IDX]=CFG_JOY_PLAYERBUT_PIN;
 }
-
-
-
-
-
-
-
