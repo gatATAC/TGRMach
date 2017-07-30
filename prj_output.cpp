@@ -36,7 +36,8 @@ void prjOutput(void) {
 
 
   /************* SPECIAL FUNCTION SECTION ************/
-  autofire();
+  /** TODO: This autofire functionality must work on the outputs, not the inputs.  The autofire for MSX or other DB9 compatible system must not affect the USB commands */
+  //autofire();
 
   /************* BUTTONS SECTION ***************/
   
@@ -45,6 +46,7 @@ void prjOutput(void) {
     if (dre.detection.allButtons[i] == 1) {
       /* When any button is pressed, the power pin will be switched down to indicate something is detected */
       digitalWrite(CFG_POWERGND_PIN,HIGH);
+      Serial.printf("but %d\n",i);
 
       if (dre.atari_system==CFG_ATARI_NORM_MSX){
         /** Translation of buttons to MSX */
