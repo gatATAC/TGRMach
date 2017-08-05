@@ -15,6 +15,11 @@
 /* Inclusion for FSM module */
 #include "fsm.h"
 
+
+  int lastValueX = CFG_USB_JOYSTICK_BLANK_POS;
+  int lastValueY = CFG_USB_JOYSTICK_BLANK_POS;
+  int lastAllButtons[CFG_JOYSTICK_NUMBER_OF_BUTTONS];
+  
 /* Initialization of the output routines.
 WARNING: The pinout initialization is not done here.  
 It is done in the prj_pinout.c file */
@@ -24,8 +29,14 @@ void prjOutputInit(void) {
   // control over when the computer receives updates, but it does
   // require you to manually call Joystick.send_now().
   Joystick.useManualSend(true);
+  for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_BUTTONS ; i++) {
+    lastAllButtons[i] = 5;
+  }
   
 }
+
+
+
 
 /* Routine to read all the outputs in the system 
 EXCEPTION: The inputs coming through an I/O bus can be synthesized in another module.*/
@@ -46,7 +57,7 @@ void prjOutput(void) {
     if (dre.detection.allButtons[i] == 1) {
       /* When any button is pressed, the power pin will be switched down to indicate something is detected */
       digitalWrite(CFG_POWERGND_PIN,HIGH);
-      Serial.printf("but %d\n",i);
+      //Serial.printf("but %d\n",i);
 
       if (dre.atari_system==CFG_ATARI_NORM_MSX){
         /** Translation of buttons to MSX */
@@ -77,9 +88,11 @@ void prjOutput(void) {
         }
       }
     }
-    
-    /* Update USB data structure */
-    Joystick.button(i + 1, dre.detection.allButtons[i]);
+    if (dre.detection.allButtons[i] != lastAllButtons[i]) {
+      /* Update USB data structure */
+      Joystick.button(i + 1, dre.detection.allButtons[i]);
+      lastAllButtons[i] = dre.detection.allButtons[i];
+    }
   }
 
   /************ JOYSTICK SECTION ***************/
@@ -151,15 +164,26 @@ void prjOutput(void) {
       digitalWrite(CFG_ATARI_PIN_2,HIGH);  // BW
     }
   }
-  
-  /* Update USB data structure */
-  Joystick.X(valueX);            // "value" is from 0 to 1023
-  Joystick.Y(valueY);            //   512 is resting position
 
   /*********** Send the USB commands */
   
   // Because setup configured the Joystick manual send,
   // the computer does not see any of the changes yet.
+
+#ifdef FORCE_SEND_X_Y
+  lastValueX = CFG_USB_JOYSTICK_BLANK_POS;
+  lastValueY = CFG_USB_JOYSTICK_BLANK_POS;
+#endif
+
+  /* Update USB data structure */
+  if (valueX != lastValueX){
+    Joystick.X(valueX);            // "value" is from 0 to 1023
+    lastValueX = valueX;
+  }
+  if (valueY != lastValueY) {
+    Joystick.Y(valueY);            //   512 is resting position    
+    lastValueY = valueY;   
+  }
   // This send_now() transmits everything all at once.
   Joystick.send_now();  
 }
