@@ -13,59 +13,6 @@
 /* Inclusion of the arduino methods */
 #include "Arduino.h"
 
-  /*
-    LEGACY CODE THAT DEMONSTRATES HOW TO READ THE DIGITAL INPUTS OF A JOYSTICK AND ENCODE THEM AS THE HEAD PAD BUTTON
-void prjInputReadHat(void){
-  // Read the "hat" controller
-  for (uint8_t i=0; i<sizeof(joy_pins) ; i++) {
-    if (digitalRead(joy_pins[i])) {
-      detectedJoy[i]=false;      
-    } else {
-      detectedJoy[i]=true;      
-      digitalWrite(CFG_POWERGND_PIN,HIGH);
-    }
-  }
-  if (detectedJoy[CFG_JOY_UP_IDX]){
-    if (detectedJoy[CFG_JOY_LEFT_IDX]){
-      angle=315;
-    } else {
-      if (detectedJoy[CFG_JOY_RIGHT_IDX]){
-        angle=45;
-      } else {
-        angle=0;
-      }   
-    }      
-  } else {
-    if (detectedJoy[CFG_JOY_DOWN_IDX]){
-      if (detectedJoy[CFG_JOY_LEFT_IDX]){
-        angle=225;
-      } else {
-        if (detectedJoy[CFG_JOY_RIGHT_IDX]){
-          angle=135;
-        } else {
-          angle=180;
-        }   
-      }      
-    } else {
-      if (detectedJoy[CFG_JOY_LEFT_IDX]){
-        angle=270;
-      } else {
-        if (detectedJoy[CFG_JOY_RIGHT_IDX]){
-          angle=90;
-        } else {
-          angle=-1;
-        }   
-      }      
-    }     
-  }
-  if (angle!=prev_angle){
-    Serial.print("Hat: ");
-    Serial.println(angle);
-    prev_angle=angle;
-  }
-  Joystick.hat(angle);
-}
-*/
 
 /* Initialization of the input routines.
 WARNING: The pinout initialization is not done here.  
@@ -95,26 +42,6 @@ void prjInput(void) {
 #endif
     }
   }
-
-/* LEGACY CODE: SEND THROUGH SERIAL PORT WHEN A BUTTON HAS CHANGED 
-  // check to see if any button changed since last time
-  boolean anyChange = false;
-  for (uint8_t i=0; i<sizeof(but_pins); i++) {
-    if (allButtons[i] != prevButtons[i]) {
-      anyChange = true;
-    }
-    prevButtons[i] = allButtons[i];
-  }
-  
-  // if any button changed, print them to the serial monitor  
-  if (anyChange) {
-    Serial.print("Buttons: ");
-    for (uint8_t i=0; i<sizeof(but_pins); i++) {
-      Serial.print(allButtons[i], DEC);
-    }
-    Serial.println();
-  }
-*/
 
 /************ JOYSTICK SECTION ****************/
 

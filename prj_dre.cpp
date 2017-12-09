@@ -16,6 +16,7 @@ void dreInit(void) {
 
 /**** Atari norm system detection ****/
 
+  dre.atari_system = CFG_ATARI_NORM_NONE;
 #ifdef DEBUG_FORCE_MSX
   dre.atari_system=CFG_ATARI_NORM_MSX;
 #endif

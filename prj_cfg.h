@@ -2,9 +2,9 @@
 #define _PRJ_CFG_H
 
 /****** Debug section ******/
-#define DEBUG_BUT_INPUT  
-#define DEBUG_JOY_INPUT  
-#define DEBUG_FORCE_MSX
+//#define DEBUG_BUT_INPUT  
+//#define DEBUG_JOY_INPUT  
+//#define DEBUG_FORCE_MSX
 
 /**** Cycle time section ****/
 #define CYCLE_TIME_IN_MICROS (5000L)
@@ -44,6 +44,7 @@
 /**** Atari norm system ****/
 #define CFG_ATARI_NORM_MSX 0
 #define CFG_ATARI_NORM_AMIGA 1
+#define CFG_ATARI_NORM_NONE -1
 
 /**** Special function configuration ****/
 #define CFG_MSX_FIRE1_BUT CFG_JOY_GREENBUT_IDX

@@ -15,11 +15,11 @@ void pinoutInit(void){
   pinMode(CFG_ATARI_PIN_2,INPUT);
   pinMode(CFG_ATARI_PIN_3,INPUT);
   pinMode(CFG_ATARI_PIN_4,INPUT);
-  //pinMode(CFG_ATARI_PIN_5,INPUT);
+  pinMode(CFG_ATARI_PIN_5,INPUT);
   pinMode(CFG_ATARI_PIN_6,INPUT);
   pinMode(CFG_ATARI_PIN_7,INPUT);
   pinMode(CFG_ATARI_PIN_8,INPUT);
-  //pinMode(CFG_ATARI_PIN_9,INPUT);
+  pinMode(CFG_ATARI_PIN_9,INPUT);
   
   /* Configure the power led DO pin */
   pinMode(CFG_POWERGND_PIN,OUTPUT);
@@ -41,6 +41,13 @@ void pinoutInit(void){
   pinMode(CFG_ATARI_PIN_4,OUTPUT);  // RIGHT
   pinMode(CFG_ATARI_PIN_6,OUTPUT);  // BUT1
   pinMode(CFG_ATARI_PIN_7,OUTPUT);  // BUT2
+  pinMode(CFG_ATARI_PIN_5,OUTPUT);  // LLANDER
+  pinMode(CFG_ATARI_PIN_9,OUTPUT);  // LLANDER 
+
+  digitalWrite(CFG_ATARI_PIN_9,LOW);
+  digitalWrite(CFG_ATARI_PIN_5,HIGH);
+  digitalWrite(CFG_ATARI_PIN_4,HIGH);
+  digitalWrite(CFG_ATARI_PIN_3,HIGH);
 }
 
 

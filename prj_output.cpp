@@ -24,7 +24,6 @@
 WARNING: The pinout initialization is not done here.  
 It is done in the prj_pinout.c file */
 void prjOutputInit(void) {
-  digitalWrite(CFG_POWERGND_PIN,LOW);
   // configure the joystick to manual send mode.  This gives precise
   // control over when the computer receives updates, but it does
   // require you to manually call Joystick.send_now().
@@ -36,58 +35,17 @@ void prjOutputInit(void) {
 }
 
 
-
-
+int selectMode = 0;
+int lastLlanderSelect = false;
+  
 /* Routine to read all the outputs in the system 
 EXCEPTION: The inputs coming through an I/O bus can be synthesized in another module.*/
 void prjOutput(void) {
-  /* When any button is pressed, the power pin will be switched down to indicate something is detected */
-  /* By default, the power led must be active */
-  digitalWrite(CFG_POWERGND_PIN,LOW);
-
-
-  /************* SPECIAL FUNCTION SECTION ************/
-  /** TODO: This autofire functionality must work on the outputs, not the inputs.  The autofire for MSX or other DB9 compatible system must not affect the USB commands */
-  //autofire();
-
+  
   /************* BUTTONS SECTION ***************/
   
   // read digital pins and use them for the buttons
   for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_BUTTONS ; i++) {
-    if (dre.detection.allButtons[i] == 1) {
-      /* When any button is pressed, the power pin will be switched down to indicate something is detected */
-      digitalWrite(CFG_POWERGND_PIN,HIGH);
-      //Serial.printf("but %d\n",i);
-
-      if (dre.atari_system==CFG_ATARI_NORM_MSX){
-        /** Translation of buttons to MSX */
-        switch(i){
-          case 0:
-            /* The first button is pressed */
-            digitalWrite(CFG_ATARI_PIN_6,LOW);
-            break;        
-          case 1:
-            /* The first button is pressed */
-            digitalWrite(CFG_ATARI_PIN_7,LOW);
-            break;
-        }
-      }      
-    } else {
-      
-      if (dre.atari_system==CFG_ATARI_NORM_MSX){
-        /** Translation of buttons to MSX */
-        switch(i){
-          case 0:
-            /* The first button is released */
-            digitalWrite(CFG_ATARI_PIN_6,HIGH);
-            break;        
-          case 1:
-            /* The first button is pressed */
-            digitalWrite(CFG_ATARI_PIN_7,HIGH);
-            break;
-        }
-      }
-    }
     if (dre.detection.allButtons[i] != lastAllButtons[i]) {
       /* Update USB data structure */
       Joystick.button(i + 1, dre.detection.allButtons[i]);
@@ -102,71 +60,32 @@ void prjOutput(void) {
   int valueX = CFG_USB_JOYSTICK_REST_POS;
   int valueY = CFG_USB_JOYSTICK_REST_POS;
 
+
 #ifdef CFG_JOYSTICK_USE_SLIDER  
   uint32_t tempslider = 0L;
 #endif
-
-  for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_POSITIONS ; i++) {
-    if (dre.detection.detectedJoy[i]) {
-      /* When any button is pressed, the power pin will be switched down to indicate something is detected */
-      digitalWrite(CFG_POWERGND_PIN,HIGH);
-    }
-  }
-
-
   if (dre.detection.detectedJoy[CFG_JOY_LEFT_IDX]){
     valueX=CFG_USB_JOYSTICK_LEFT_POS;
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_3,LOW);  // LEFT
-    }
-  } else {
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_3,HIGH);  // LEFT
-    }
   }
 
   if (dre.detection.detectedJoy[CFG_JOY_RIGHT_IDX]){
     valueX=CFG_USB_JOYSTICK_RIGHT_POS;
-
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_4,LOW);  // RIGHT
-    }
-  } else {
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_4,HIGH);  // RIGHT
-    }
   }
 
   if (dre.detection.detectedJoy[CFG_JOY_UP_IDX]){
-    valueY=CFG_USB_JOYSTICK_UP_POS;
-
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_1,LOW);  // FW
-    }
+    valueY = CFG_USB_JOYSTICK_UP_POS;
+    lastLlanderSelect = true;
   } else {
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_1,HIGH);  // FW
+    if (lastLlanderSelect == true) {
+      digitalWrite(CFG_MODELIGHT_BASE_PIN + selectMode, HIGH);
+      selectMode = (selectMode + 1) % 4;
+      digitalWrite(CFG_MODELIGHT_BASE_PIN  + selectMode, LOW);      
+      lastLlanderSelect = false; 
     }
   }
-
+  Serial.println(dre.detection.detectedJoy[CFG_JOY_UP_IDX]);
   if (dre.detection.detectedJoy[CFG_JOY_DOWN_IDX]){
     valueY=CFG_USB_JOYSTICK_DOWN_POS;
-
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_2,LOW);  // BW
-    }
-  } else {
-    if (dre.atari_system==CFG_ATARI_NORM_MSX){
-      // Translation to MSX
-      digitalWrite(CFG_ATARI_PIN_2,HIGH);  // BW
-    }
   }
 
   /*********** Send the USB commands */
@@ -180,13 +99,13 @@ void prjOutput(void) {
 #endif
 
 #ifdef CFG_JOYSTICK_USE_SLIDER
-  Serial.print(dre.detection.slider);
-  Serial.print(" ");
+  //Serial.print(dre.detection.slider);
+  //Serial.print(" ");
   tempslider = dre.detection.slider - (uint32_t)CFG_JOY_SLIDER_MIN;
   tempslider = (tempslider * (uint32_t)CFG_JOY_SLIDER_OUTPUT_MAX);
   tempslider /= (uint32_t)((uint32_t)CFG_JOY_SLIDER_MAX - (uint32_t)CFG_JOY_SLIDER_MIN);
   tempslider -= (uint32_t)CFG_JOY_SLIDER_OUTPUT_MIN;
-  Serial.println(tempslider);
+  //Serial.println(tempslider);
   Joystick.Z((uint16_t)tempslider);
 #endif
 

@@ -9,14 +9,14 @@
 /**** Pin assigment section ****/
 #define CFG_POWERGND_PIN 2 // anteriormente 2
 
-#define CFG_JOY_UP_PIN 14 // anteriormente 23
+#define CFG_JOY_UP_PIN 20 // anteriormente 23
 #define CFG_JOY_DOWN_PIN 19 // anteriormente 21   
 #define CFG_JOY_LEFT_PIN 23 // anteriormente 22
 #define CFG_JOY_RIGHT_PIN 22 // anteriormente 20
 
-#define CFG_JOY_GREENBUT_PIN 21// anteriormente 19
+#define CFG_JOY_GREENBUT_PIN 14// anteriormente 19
 #define CFG_JOY_REDBUT_PIN 18 // anteriormente 18
-#define CFG_JOY_BLUEBUT_PIN 20 // anteriormente 17
+#define CFG_JOY_BLUEBUT_PIN 21 // anteriormente 17
 #define CFG_JOY_YELLOWBUT_PIN 17 // anteriormente 16
 #define CFG_JOY_GREYBUT_PIN 16 // anteriormente 15 // anteriormente 14 
 #define CFG_JOY_BLACKBUT_PIN 15 // anteriormente 14 // anteriormente 15
@@ -44,6 +44,8 @@
 #define CFG_ATARI_PIN_7 11 // anteriormente 1  // MSX TRG2 // VERDE 2o conector
 #define CFG_ATARI_PIN_8 10 // anteriormente 0  // MSX OUT // AMARILLO 2o conector
 #define CFG_ATARI_PIN_9 4 // anteriormente NC // MSX GND // NEGRO 1er conector
+
+#define CFG_MODELIGHT_BASE_PIN 4
 
 /* Prepares the pinout for project use */
 void pinoutInit(void);
