@@ -102,6 +102,10 @@ void prjOutput(void) {
   int valueX = CFG_USB_JOYSTICK_REST_POS;
   int valueY = CFG_USB_JOYSTICK_REST_POS;
 
+#ifdef CFG_JOYSTICK_USE_SLIDER  
+  uint32_t tempslider = 0L;
+#endif
+
   for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_POSITIONS ; i++) {
     if (dre.detection.detectedJoy[i]) {
       /* When any button is pressed, the power pin will be switched down to indicate something is detected */
@@ -175,6 +179,17 @@ void prjOutput(void) {
   lastValueY = CFG_USB_JOYSTICK_BLANK_POS;
 #endif
 
+#ifdef CFG_JOYSTICK_USE_SLIDER
+  Serial.print(dre.detection.slider);
+  Serial.print(" ");
+  tempslider = dre.detection.slider - (uint32_t)CFG_JOY_SLIDER_MIN;
+  tempslider = (tempslider * (uint32_t)CFG_JOY_SLIDER_OUTPUT_MAX);
+  tempslider /= (uint32_t)((uint32_t)CFG_JOY_SLIDER_MAX - (uint32_t)CFG_JOY_SLIDER_MIN);
+  tempslider -= (uint32_t)CFG_JOY_SLIDER_OUTPUT_MIN;
+  Serial.println(tempslider);
+  Joystick.Z((uint16_t)tempslider);
+#endif
+
   /* Update USB data structure */
   if (valueX != lastValueX){
     Joystick.X(valueX);            // "value" is from 0 to 1023
@@ -184,6 +199,7 @@ void prjOutput(void) {
     Joystick.Y(valueY);            //   512 is resting position    
     lastValueY = valueY;   
   }
+
   // This send_now() transmits everything all at once.
   Joystick.send_now();  
 }

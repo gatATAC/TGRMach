@@ -82,7 +82,7 @@ void prjInput(void) {
   
   // read digital pins and use them for the buttons
   for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_BUTTONS ; i++) {
-    if (digitalRead(dre.detection.but_pins[i])==HIGH) {
+    if (digitalRead(dre.detection.but_pins[i])==CFG_BUT_NOT_DETECTED_LEVEL) {
       // when a pin reads high, the button is not pressed
       // the pullup resistor creates the "on" signal      
       dre.detection.allButtons[i] = 0;
@@ -119,7 +119,7 @@ void prjInput(void) {
 /************ JOYSTICK SECTION ****************/
 
   for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_POSITIONS ; i++) {
-    if (digitalRead(dre.detection.joy_pins[i])==HIGH) {
+    if (digitalRead(dre.detection.joy_pins[i]) == CFG_JOY_NOT_DETECTED_LEVEL) {
       dre.detection.detectedJoy[i]=false;      
     } else {
       dre.detection.detectedJoy[i]=true;
@@ -130,6 +130,9 @@ void prjInput(void) {
     }
   }
 
+#ifdef CFG_JOYSTICK_USE_SLIDER
+  dre.detection.slider = analogRead(CFG_JOY_SLIDER_ADC);
+#endif
 /*
     LEGACY CODE THAT DEMONSTRATES HOW TO READ THE DIGITAL INPUTS OF A JOYSTICK AND ENCODE THEM AS THE HEAD PAD BUTTON 
 prjInputReadHat();

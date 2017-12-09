@@ -2,8 +2,8 @@
 #define _PRJ_CFG_H
 
 /****** Debug section ******/
-//#define DEBUG_BUT_INPUT  
-//#define DEBUG_JOY_INPUT  
+#define DEBUG_BUT_INPUT  
+#define DEBUG_JOY_INPUT  
 #define DEBUG_FORCE_MSX
 
 /**** Cycle time section ****/
@@ -11,7 +11,9 @@
 
 /**** Joystick detection section ****/
 #define CFG_JOYSTICK_NUMBER_OF_POSITIONS 4
-#define CFG_JOYSTICK_NUMBER_OF_BUTTONS 11
+#define CFG_JOYSTICK_NUMBER_OF_BUTTONS 3 //11
+
+#define CFG_JOYSTICK_USE_SLIDER
 
 #define CFG_JOY_UP_IDX 0
 #define CFG_JOY_DOWN_IDX 1
@@ -52,6 +54,11 @@
 #define CFG_AUTOFIRE_OFF1_TIME 122
 #define CFG_AUTOFIRE_OFF2_TIME 118
 #define CFG_AUTOFIRE_OFF3_TIME 132
+
+#define CFG_JOY_PIN_MODE INPUT_PULLUP
+#define CFG_BUT_PIN_MODE INPUT_PULLUP
+#define CFG_JOY_NOT_DETECTED_LEVEL HIGH
+#define CFG_BUT_NOT_DETECTED_LEVEL HIGH
 
 #endif /* _PRJ_CFG_H */
 

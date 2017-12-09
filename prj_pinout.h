@@ -9,22 +9,30 @@
 /**** Pin assigment section ****/
 #define CFG_POWERGND_PIN 2 // anteriormente 2
 
-#define CFG_JOY_UP_PIN 23 // anteriormente 23
-#define CFG_JOY_DOWN_PIN 21 // anteriormente 21   
-#define CFG_JOY_LEFT_PIN 22 // anteriormente 22
-#define CFG_JOY_RIGHT_PIN 20 // anteriormente 20
+#define CFG_JOY_UP_PIN 14 // anteriormente 23
+#define CFG_JOY_DOWN_PIN 19 // anteriormente 21   
+#define CFG_JOY_LEFT_PIN 23 // anteriormente 22
+#define CFG_JOY_RIGHT_PIN 22 // anteriormente 20
 
-#define CFG_JOY_GREENBUT_PIN 19// anteriormente 19
+#define CFG_JOY_GREENBUT_PIN 21// anteriormente 19
 #define CFG_JOY_REDBUT_PIN 18 // anteriormente 18
-#define CFG_JOY_BLUEBUT_PIN 17 // anteriormente 17
-#define CFG_JOY_YELLOWBUT_PIN 16 // anteriormente 16
-#define CFG_JOY_GREYBUT_PIN 1 // anteriormente 15 // anteriormente 14 
-#define CFG_JOY_BLACKBUT_PIN 0 // anteriormente 14 // anteriormente 15
+#define CFG_JOY_BLUEBUT_PIN 20 // anteriormente 17
+#define CFG_JOY_YELLOWBUT_PIN 17 // anteriormente 16
+#define CFG_JOY_GREYBUT_PIN 16 // anteriormente 15 // anteriormente 14 
+#define CFG_JOY_BLACKBUT_PIN 15 // anteriormente 14 // anteriormente 15
 #define CFG_JOY_WHITELBUT_PIN 29 // anteriormente 12
 #define CFG_JOY_WHITERBUT_PIN 30 // anteriormente 11
 #define CFG_JOY_MODEBUT_PIN 31 // anteriormente 10
 #define CFG_JOY_RESTARTBUT_PIN 32 // anteriormente 9
 #define CFG_JOY_PLAYERBUT_PIN 33 // anteriormente 8
+
+#ifdef CFG_JOYSTICK_USE_SLIDER
+#define CFG_JOY_SLIDER_ADC A3
+#define CFG_JOY_SLIDER_MAX 1023
+#define CFG_JOY_SLIDER_MIN 0
+#define CFG_JOY_SLIDER_OUTPUT_MAX 290
+#define CFG_JOY_SLIDER_OUTPUT_MIN 0
+#endif
 
 /**** ATARI norm output ****/
 #define CFG_ATARI_PIN_1 9 // anteriormente 7  // MSX FW // AZUL 1er conector

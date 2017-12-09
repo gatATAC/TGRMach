@@ -40,4 +40,8 @@ void dreInit(void) {
   dre.detection.but_pins[CFG_JOY_MODEBUT_IDX]=CFG_JOY_MODEBUT_PIN;
   dre.detection.but_pins[CFG_JOY_RESTARTBUT_IDX]=CFG_JOY_RESTARTBUT_PIN;
   dre.detection.but_pins[CFG_JOY_PLAYERBUT_IDX]=CFG_JOY_PLAYERBUT_PIN;
+
+#ifdef CFG_JOYSTICK_USE_SLIDER
+  dre.detection.slider = 0;
+#endif
 }

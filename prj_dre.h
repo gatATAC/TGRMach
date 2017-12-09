@@ -17,6 +17,9 @@ typedef struct {
   bool detectedJoy[CFG_JOYSTICK_NUMBER_OF_POSITIONS];
   int angle;
   int prev_angle;
+#ifdef CFG_JOYSTICK_USE_SLIDER
+  uint32_t slider;
+#endif  
 } t_detection;
 
 /* This structure type contains the DRE global variables */

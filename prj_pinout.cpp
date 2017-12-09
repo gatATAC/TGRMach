@@ -26,12 +26,12 @@ void pinoutInit(void){
   
   /* Configure the joystick DI pins */
   for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_POSITIONS; i++) {
-    pinMode(dre.detection.joy_pins[i], INPUT_PULLUP);
+    pinMode(dre.detection.joy_pins[i], CFG_JOY_PIN_MODE);
   }
   
   /* Configure the buttons DI pins */
   for (uint8_t i=0; i<CFG_JOYSTICK_NUMBER_OF_BUTTONS; i++) {
-    pinMode(dre.detection.but_pins[i], INPUT_PULLUP);
+    pinMode(dre.detection.but_pins[i], CFG_BUT_PIN_MODE);
   }
 
   /* Configure the atari norm connector as output, for MSX */
