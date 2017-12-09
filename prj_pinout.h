@@ -11,8 +11,8 @@
 
 #define CFG_JOY_UP_PIN 20 // anteriormente 23
 #define CFG_JOY_DOWN_PIN 19 // anteriormente 21   
-#define CFG_JOY_LEFT_PIN 23 // anteriormente 22
-#define CFG_JOY_RIGHT_PIN 22 // anteriormente 20
+#define CFG_JOY_LEFT_PIN 22 // anteriormente 22
+#define CFG_JOY_RIGHT_PIN 23 // anteriormente 20
 
 #define CFG_JOY_GREENBUT_PIN 14// anteriormente 19
 #define CFG_JOY_REDBUT_PIN 18 // anteriormente 18
