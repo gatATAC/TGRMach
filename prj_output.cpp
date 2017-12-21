@@ -99,13 +99,13 @@ void prjOutput(void) {
 #endif
 
 #ifdef CFG_JOYSTICK_USE_SLIDER
-  //Serial.print(dre.detection.slider);
-  //Serial.print(" ");
+  Serial.print(dre.detection.slider);
+  Serial.print(" ");
   tempslider = dre.detection.slider - (uint32_t)CFG_JOY_SLIDER_MIN;
   tempslider = (tempslider * (uint32_t)CFG_JOY_SLIDER_OUTPUT_MAX);
   tempslider /= (uint32_t)((uint32_t)CFG_JOY_SLIDER_MAX - (uint32_t)CFG_JOY_SLIDER_MIN);
   tempslider -= (uint32_t)CFG_JOY_SLIDER_OUTPUT_MIN;
-  //Serial.println(tempslider);
+  Serial.println(tempslider);
   Joystick.Z((uint16_t)tempslider);
 #endif
 
